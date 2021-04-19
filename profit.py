@@ -1,9 +1,10 @@
 """ Lab 2.1 Python Development Exercises
 
-You work for a manufacturer, and have been asked to calculate the total profit made on the
-sales of a product. You are given a dictionary containing the cost price per unit (in
-dollars), sell price per unit (in dollars), and the starting inventory. Return the total profit made,
-rounded to the nearest dollar.
+You work for a manufacturer, and have been asked to calculate the total
+profit made on the sales of a product. You are given a dictionary containing
+the cost price per unit (in dollars), sell price per unit (in dollars), and
+the starting inventory. Return the total profit made, rounded to the nearest
+dollar.
 
 Examples
 profit({
@@ -31,6 +32,8 @@ Notes
 :authors: - Hugo Rodríguez
 """
 
+import unittest
+
 """
 Test Cases:
 
@@ -44,28 +47,40 @@ Test Cases:
 8- [TTP] Dictionary values as other data types
 """
 
-import unittest
 
 def checkArgument(expression: bool, errorMsg: str):
     if not expression:
         raise ValueError(errorMsg)
 
+
 def checkDictionaryKeysExist(d: dict, *key_args):
     for k in key_args:
         checkArgument(k in d, f"'{k}' data is missing from dictionary")
 
+
 def checkDictionaryValueType(d: dict, k: any, t):
-    checkArgument(isinstance(d[k], t), f"Expected a '{t.__name__}', '{type(d[k]).__name__}' given")
+    checkArgument(
+        isinstance(d[k], t),
+        f"Expected a '{t.__name__}', '{type(d[k]).__name__}' given"
+    )
+
 
 def profit(d: dict[str, any]) -> int:
-    checkArgument(isinstance(d, dict), f"Expected a 'dictionary', '{type(d).__name__}' given")
-    checkArgument(bool(d), 'Cannot perform profit calculation, empty dictionary given')
+    checkArgument(
+        isinstance(d, dict),
+        f"Expected a 'dictionary', '{type(d).__name__}' given"
+    )
+    checkArgument(
+        bool(d),
+        'Cannot perform profit calculation, empty dictionary given'
+    )
     checkDictionaryKeysExist(d, 'sell_price', 'cost_price', 'inventory')
     checkDictionaryValueType(d, 'sell_price', float)
     checkDictionaryValueType(d, 'cost_price', float)
     checkDictionaryValueType(d, 'inventory', int)
-    
+
     return d['sell_price'] * d['inventory'] - d['cost_price'] * d['inventory']
+
 
 class ProfitTest(unittest.TestCase):
     def test_pass_get_correct_profit(self):
@@ -156,6 +171,7 @@ class ProfitTest(unittest.TestCase):
                 'cost_price': 145.00,
                 'stock': 8500.1
             })
+
 
 if __name__ == "__main__":
     unittest.main()

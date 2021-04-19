@@ -1,6 +1,7 @@
 """ Lab 2.1 Python Development Exercises
-You need to create two functions to substitute str() and int(). A function called int_to_str() that converts integers
-into strings and a function called str_to_int() that converts strings into integers.
+You need to create two functions to substitute str() and int(). A function
+called int_to_str() that converts integers into strings and a function called
+str_to_int() that converts strings into integers.
 
 Examples:
 int_to_str(4) ➞ "4"
@@ -9,6 +10,9 @@ int_to_str(29348) ➞ "29348"
 
 :authors: - Hugo Rodríguez
 """
+
+import unittest
+import math
 
 """
 Test Cases:
@@ -25,12 +29,11 @@ Test Cases:
 10 - [TTF] Exception raised when None given instead of string
 """
 
-import unittest
-import math
 
 def checkArgument(expression: bool, errorMsg: str):
     if not expression:
         raise ValueError(errorMsg)
+
 
 def digitCount(number: int) -> int:
     if number > 0:
@@ -40,12 +43,17 @@ def digitCount(number: int) -> int:
 
     return 1
 
+
 def digit(number: int, n: int) -> int:
     return number // 10 ** n % 10
 
+
 def int_to_str(number: int) -> str:
     checkArgument(number is not None, "Expected an integer, 'None' given")
-    checkArgument(isinstance(number, int), f"Expected an integer, '{type(number).__name__}' given")
+    checkArgument(
+        isinstance(number, int),
+        f"Expected an integer, '{type(number).__name__}' given"
+    )
 
     strNum = ''
     digits = digitCount(number)
@@ -54,10 +62,17 @@ def int_to_str(number: int) -> str:
 
     return strNum if number >= 0 else '-' + strNum
 
+
 def str_to_int(number: str) -> int:
     checkArgument(number is not None, "Expected a string, 'None' given")
-    checkArgument(isinstance(number, str), f"Expected a string, '{type(number).__name__}' given")
-    checkArgument(number.lstrip("-+").isdigit(), f"Given string does not contain an integer, '{number}' given")
+    checkArgument(
+        isinstance(number, str),
+        f"Expected a string, '{type(number).__name__}' given"
+    )
+    checkArgument(
+        number.lstrip("-+").isdigit(),
+        f"Given string does not contain an integer, '{number}' given"
+    )
 
     num = number.lstrip("-+")
     intNum = 0
@@ -65,6 +80,7 @@ def str_to_int(number: str) -> int:
         intNum += (ord(c) - ord('0')) * 10 ** (len(num) - i - 1)
 
     return intNum if not number.startswith('-') else intNum * -1
+
 
 class ConversionTest(unittest.TestCase):
     def test_pass_zero_and_positive_ints_convert_to_string(self):
@@ -107,6 +123,7 @@ class ConversionTest(unittest.TestCase):
     def test_fail_raise_exception_when_none_passed_instead_of_str(self):
         with self.assertRaises(ValueError):
             str_to_int(None)
+
 
 if __name__ == "__main__":
     unittest.main()
