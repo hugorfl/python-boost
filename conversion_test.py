@@ -13,8 +13,8 @@ Test Cases:
 10 - [TTF] Exception raised when None given instead of string
 """
 
-from pythonfail import int_to_str
-from pythonfail import str_to_int
+from python_fail import int_to_str
+from python_fail import str_to_int
 import unittest
 
 
