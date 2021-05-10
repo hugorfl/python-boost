@@ -11,8 +11,8 @@ int_to_str(29348) ➞ "29348"
 :authors: - Hugo Rodríguez
 """
 
-from utils import require
 import math
+from utils import require
 
 
 def digit_count(number: int) -> int:
@@ -24,8 +24,8 @@ def digit_count(number: int) -> int:
     return 1
 
 
-def digit(number: int, n: int) -> int:
-    return number // 10 ** n % 10
+def digit(number: int, pos: int) -> int:
+    return number // 10 ** pos % 10
 
 
 def int_to_str(number: int) -> str:
@@ -56,7 +56,7 @@ def str_to_int(number: str) -> int:
 
     num = number.lstrip("-+")
     int_num = 0
-    for i, c in enumerate(num):
-        int_num += (ord(c) - ord('0')) * 10 ** (len(num) - i - 1)
+    for i, char_dig in enumerate(num):
+        int_num += (ord(char_dig) - ord('0')) * 10 ** (len(num) - i - 1)
 
     return int_num if not number.startswith('-') else int_num * -1
