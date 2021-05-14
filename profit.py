@@ -32,6 +32,7 @@ Notes
 :authors: - Hugo Rodríguez
 """
 
+from typing import Dict
 from utils import require
 
 
@@ -47,7 +48,7 @@ def require_dictionary_value_type(d: dict, k: any, t):
     )
 
 
-def profit(d: dict[str, any]) -> int:
+def profit(d: Dict[str, any]) -> int:
     require(
         isinstance(d, dict),
         f"Expected a 'dictionary', '{type(d).__name__}' given"
