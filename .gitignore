@@ -5,3 +5,6 @@ sca_res.txt
 
 # generated
 __pycache__
+
+# doxygen
+html/
